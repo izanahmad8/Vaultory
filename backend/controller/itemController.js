@@ -30,7 +30,7 @@ const addItem = async (req, res) => {
       discount,
     });
     const savedItem = await newItem.save();
-    res.status(201).json({
+    res.status(200).json({
       success: true,
       message: "Item added successfully",
       item: savedItem,
@@ -68,7 +68,45 @@ const deleteItem = async (req, res) => {
 
 //update specific item
 
-const updateItem = async (req, res) => {};
+const updateItem = async (req, res) => {
+  const { id } = req.params;
+  const { itemName, size, price, quantity, buyPrice, discount } = req.body;
+  const { error } = itemSchema.validate({
+    itemName,
+    size,
+    price,
+    quantity,
+    buyPrice,
+    discount,
+  });
+  if (error) {
+    return res.status(400).json({ success: false, message: error.message });
+  }
+  try {
+    const Item = await itemModel.findById(id);
+    if (!Item) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Item not found" });
+    }
+    Item.itemName = itemName;
+    Item.size = size;
+    Item.price = price;
+    Item.quantity = quantity;
+    Item.buyPrice = buyPrice;
+    Item.discount = discount;
+
+    const updateItem = await Item.save();
+    res.status(200).json({
+      success: true,
+      message: "Item updated successfully",
+      item: updateItem,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: "Server Error" });
+  }
+};
 
 //fetch all items
 
