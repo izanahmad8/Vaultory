@@ -57,9 +57,7 @@ const login = async (req, res) => {
         .status(400)
         .json({ success: false, message: "Email doesn't exists" });
     }
-    console.log(password, user.password);
     const isMatch = await bcrypt.compare(password, user.password);
-    console.log(isMatch);
     if (!isMatch) {
       return res.status(400).json({
         success: false,
