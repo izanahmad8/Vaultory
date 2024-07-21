@@ -3,6 +3,7 @@ import cors from "cors";
 import "dotenv/config.js";
 import connectToDB from "./config/db.js";
 import userRouter from "./routes/userRoutes.js";
+import itemRouter from "./routes/itemRoutes.js";
 
 const app = express();
 const PORT = process.env.PORT;
@@ -16,6 +17,7 @@ app.use(cors());
 
 //api endpoints
 app.use("/api/user", userRouter);
+app.use("/api/item", itemRouter);
 
 app.get("/", (req, res) => {
   res.send("Hello World");

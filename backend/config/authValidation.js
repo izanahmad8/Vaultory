@@ -33,4 +33,14 @@ const LoginAuthSchema = joi.object({
     .required(),
 });
 
-export { AuthSchema, LoginAuthSchema };
+const itemSchema = joi.object({
+  userId: joi.string().required(),
+  itemName: joi.string().required(),
+  size: joi.string().required(),
+  price: joi.number().required(),
+  quantity: joi.number().required(),
+  buyPrice: joi.number().required(),
+  discount: joi.number().required(),
+});
+
+export { AuthSchema, LoginAuthSchema, itemSchema };
