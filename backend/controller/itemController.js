@@ -110,6 +110,20 @@ const updateItem = async (req, res) => {
 
 //fetch all items
 
-const fetchItem = async (req, res) => {};
+const fetchItem = async (req, res) => {
+  const userId = req.userId;
+
+  try {
+    const items = await itemModel.find({ userId });
+
+    res.status(200).json({
+      success: true,
+      items,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+};
 
 export { addItem, deleteItem, updateItem, fetchItem };
