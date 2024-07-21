@@ -11,7 +11,7 @@ const itemRouter = express.Router();
 
 itemRouter.post("/add", authMiddleware, addItem);
 itemRouter.get("/fetch", authMiddleware, fetchItem);
-itemRouter.post("/update", authMiddleware, updateItem);
-itemRouter.delete("/delete", authMiddleware, deleteItem);
+itemRouter.post("/update/:id", authMiddleware, updateItem);
+itemRouter.delete("/delete/:id", authMiddleware, deleteItem);
 
 export default itemRouter;

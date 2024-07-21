@@ -4,10 +4,9 @@ import { itemSchema } from "../config/authValidation.js";
 //add items to inventory
 
 const addItem = async (req, res) => {
-  const { userId, itemName, size, price, quantity, buyPrice, discount } =
-    req.body;
+  const { itemName, size, price, quantity, buyPrice, discount } = req.body;
+  const userId = req.userId;
   const { error } = itemSchema.validate({
-    userId,
     itemName,
     size,
     price,
@@ -44,7 +43,28 @@ const addItem = async (req, res) => {
 
 //delete items from inventory
 
-const deleteItem = async (req, res) => {};
+const deleteItem = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const item = await itemModel.findByIdAndDelete(id);
+
+    if (!item) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Item not found" });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Item deleted successfully",
+      item: item,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+};
 
 //update specific item
 

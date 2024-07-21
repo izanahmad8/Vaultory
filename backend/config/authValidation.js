@@ -34,7 +34,6 @@ const LoginAuthSchema = joi.object({
 });
 
 const itemSchema = joi.object({
-  userId: joi.string().required(),
   itemName: joi.string().required(),
   size: joi.string().required(),
   price: joi.number().required(),
