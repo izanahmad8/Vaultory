@@ -10,8 +10,8 @@ import {
 const partyRouter = express.Router();
 
 partyRouter.post("/add", authMiddleware, addParty);
-partyRouter.delete("/delete", authMiddleware, deleteParty);
-partyRouter.post("/update", authMiddleware, updateParty);
+partyRouter.delete("/delete/:id", authMiddleware, deleteParty);
+partyRouter.post("/update/:id", authMiddleware, updateParty);
 partyRouter.get("/fetch", authMiddleware, fetchParty);
 
 export default partyRouter;
