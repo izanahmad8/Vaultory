@@ -4,6 +4,7 @@ import "dotenv/config.js";
 import connectToDB from "./config/db.js";
 import userRouter from "./routes/userRoutes.js";
 import itemRouter from "./routes/itemRoutes.js";
+import partyRouter from "./routes/partyRoutes.js";
 
 const app = express();
 const PORT = process.env.PORT;
@@ -18,6 +19,7 @@ app.use(cors());
 //api endpoints
 app.use("/api/user", userRouter);
 app.use("/api/item", itemRouter);
+app.use("/api/party", partyRouter);
 
 app.get("/", (req, res) => {
   res.send("Hello World");

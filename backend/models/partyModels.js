@@ -19,7 +19,7 @@ const partySchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    PartyType: {
+    partyType: {
       type: String,
       required: true,
     },
