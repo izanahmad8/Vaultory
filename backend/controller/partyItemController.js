@@ -104,7 +104,26 @@ const updatePartyItem = async (req, res) => {
 
 //delete partyItem
 
-const deletePartyItem = async (req, res) => {};
+const deletePartyItem = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const partyItem = await partyItemModel.findByIdAndDelete(id);
+    if (!partyItem) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Item not found" });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Item deleted successfully",
+      partyItem: partyItem,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+};
 
 //fetch partyItem
 
