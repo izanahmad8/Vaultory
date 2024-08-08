@@ -127,6 +127,24 @@ const deletePartyItem = async (req, res) => {
 
 //fetch partyItem
 
-const fetchPartyItem = async (req, res) => {};
+const fetchPartyItem = async (req, res) => {
+  const { partyId } = req.params;
+  try {
+    const partyItem = await partyItemModel.find({ partyId });
+    if (partyItem.length === 0) {
+      return res
+        .status(404)
+        .json({ success: false, message: "No items found for this party" });
+    }
+    res.status(200).json({
+      success: true,
+      message: "Item fetched successfull",
+      partyItem: partyItem,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+};
 
 export { addPartyItem, updatePartyItem, deletePartyItem, fetchPartyItem };
