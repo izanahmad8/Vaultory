@@ -5,7 +5,7 @@ import { AuthSchema, LoginAuthSchema } from "../config/authValidation.js";
 
 //token generation
 const generateToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "1h" });
+  return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "2h" });
 };
 
 //register user
