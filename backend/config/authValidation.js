@@ -49,4 +49,20 @@ const partySchema = joi.object({
   partyType: joi.string().required(),
 });
 
-export { AuthSchema, LoginAuthSchema, itemSchema, partySchema };
+const partyItemSchema = joi.object({
+  itemName: joi.string().required(),
+  size: joi.string().required(),
+  price: joi.number().required(),
+  sellPrice: joi.number().required(),
+  quantity: joi.number().required(),
+  discount: joi.number().required(),
+  date: joi.string().required(),
+});
+
+export {
+  AuthSchema,
+  LoginAuthSchema,
+  itemSchema,
+  partySchema,
+  partyItemSchema,
+};
